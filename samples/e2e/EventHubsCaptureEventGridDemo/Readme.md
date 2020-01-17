@@ -57,6 +57,13 @@ New-AzureRmResourceGroup -Name rgDataMigration -Location westcentralus
 New-AzureRmResourceGroupDeployment -ResourceGroupName rgDataMigration -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/event-grid/EventHubsDataMigration.json -eventHubNamespaceName <event-hub-namespace> -eventHubName hubdatamigration -sqlServerName <sql-server-name> -sqlServerUserName <user-name> -sqlServerDatabaseName <database-name> -storageName <unique-storage-name> -functionAppName <app-name>
 ```
 
+Or
+az group create -l westcentralus -n ntmsEventHubRG
+az group deployment create \
+  --resource-group ntmsEventHubRG \
+  --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/event-grid/EventHubsDataMigration.json \
+  --parameters eventHubNamespaceName=ntmsevhub1 eventHubName=hubdatamigration sqlServerName=ntmssqlev1 sqlServerUserName=vmadmin sqlServerPassword=123#ntms123# sqlServerDatabaseName=ntmsdb1 storageName=ntmsevsa1 functionAppName=ntmsev1fun
+
 ## 2. Create a table in SQL Data Warehouse 
 Create a table in your Data Warehouse by running the *CreateDataWarehouseTable.sql* script using Visual Studio or the Query Editor in the portal. 
 
